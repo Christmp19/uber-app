@@ -25,9 +25,9 @@
     <td align="center">
       <img src="covers/cover7.png?raw=true" alt="Template Screenshot" width="200">
     </td>
-    <!-- <td align="center">
+    <td align="center">
       <img src="covers/cover8.png?raw=true" alt="Template Screenshot" width="200">
-    </td> -->
+    </td>
   </tr>
 </table>
 
