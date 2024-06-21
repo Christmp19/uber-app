@@ -34,7 +34,17 @@ const Map = () => {
 
                 const data = await response.json();
                 if (data.rows.length > 0 && data.rows[0].elements.length > 0) {
-                    dispatch(setTravelTimeInformation(data.rows[0].elements[0]));
+                    const distanceInMiles = data.rows[0].elements[0].distance.value;
+                    const distanceInKm = (distanceInMiles / 1000).toFixed(2);
+                    const distanceTextInKm = `${distanceInKm} km`;
+
+                    dispatch(setTravelTimeInformation({
+                        ...data.rows[0].elements[0],
+                        distance: {
+                            ...data.rows[0].elements[0].distance,
+                            text: distanceTextInKm,
+                        }
+                    }));
                 } else {
                     throw new Error('No travel data available');
                 }
@@ -45,6 +55,7 @@ const Map = () => {
 
         getTravelTime();
     }, [origin, destination, GOOGLE_MAPS_APIKEY]);
+
 
     return (
         <MapView

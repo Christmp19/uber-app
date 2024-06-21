@@ -38,7 +38,7 @@ const RideOptionsCard = () => {
       <View>
         <TouchableOpacity
           onPress={() => navigation.navigate('NavigateCard')}
-          className='absolute top-3 left-5 z-50 p-3 rounded-full' 
+          className='absolute top-2 left-5 z-50 p-3 rounded-full'
         >
           <Icon
             name='chevron-left'
@@ -46,15 +46,15 @@ const RideOptionsCard = () => {
             size={32}
           />
         </TouchableOpacity>
-        <Text className='text-center py-5 text-xl'>
-          Select a Ride - {travelTimeInformation?.distance.text} 
+        <Text className='text-center py-3 text-xl'>
+          Select a Ride - {travelTimeInformation?.distance?.text}
         </Text>
       </View>
       
       <FlatList
         data={data}
         keyExtractor={(item) => item.id}
-        renderItem={({ item: { id, title, multiplier, image }, item}) => (
+        renderItem={({ item: { id, title, multiplier, image }, item }) => (
           <TouchableOpacity
             onPress={() => setSelected(item)}
             className={`flex-row items-center justify-between px-6 ${id === selected?.id && 'bg-gray-200'}`}
@@ -69,7 +69,7 @@ const RideOptionsCard = () => {
             />
             <View className='-ml-6'>
               <Text className='text-xl font-semibold'>{title}</Text>
-              <Text className='text-[13px]'>{travelTimeInformation?.duration.text} Travel Time</Text>
+              <Text className='text-[13px]'>{travelTimeInformation?.duration?.text} Travel Time</Text>
             </View>
             <Text className='text-xl'>
 
@@ -88,16 +88,19 @@ const RideOptionsCard = () => {
         )}
       />
 
-      <View className=''>
+      <View className='border-t border-gray-200'>
         <TouchableOpacity
           disabled={!selected}
-          className={`bg-black py-3 mx-3 mb-8 ${!selected && 'bg-gray-300'}`}>
-          <Text className='text-center text-white text-xl'>Choose {selected?.title }</Text>
+          className={`bg-black py-3 mb-4 mt-2 mx-6 ${!selected && 'bg-gray-300'}`}
+        >
+          <Text className='text-center text-white text-xl'>
+            Choose {selected?.title}
+          </Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
-  )
-}
+  );
+};
 
 export default RideOptionsCard
 
