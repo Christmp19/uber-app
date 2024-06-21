@@ -57,7 +57,7 @@ const RideOptionsCard = () => {
         renderItem={({ item: { id, title, multiplier, image }, item}) => (
           <TouchableOpacity
             onPress={() => setSelected(item)}
-            className={`flex-row items-center justify-between px-10 ${id === selected?.id && 'bg-gray-200'}`}
+            className={`flex-row items-center justify-between px-6 ${id === selected?.id && 'bg-gray-200'}`}
           >
             <Image
               style={{
@@ -69,17 +69,29 @@ const RideOptionsCard = () => {
             />
             <View className='-ml-6'>
               <Text className='text-xl font-semibold'>{title}</Text>
-              <Text>{travelTimeInformation?.duration.text} Travel Time</Text>
+              <Text className='text-[13px]'>{travelTimeInformation?.duration.text} Travel Time</Text>
             </View>
-            <Text className='text-xl'>99€</Text>
+            <Text className='text-xl'>
+
+              {new Intl.NumberFormat('en-gb', {
+                style: 'currency',
+                currency: 'EUR',
+              }).format(
+                (travelTimeInformation?.duration.value *
+                  SURGE_CHARGE_RATE *
+                  multiplier
+                ) / 100
+              )}
+
+            </Text>
           </TouchableOpacity>
         )}
       />
 
-      <View className='my-auto'>
+      <View className=''>
         <TouchableOpacity
           disabled={!selected}
-          className={`bg-black py-3 m-3 ${!selected && 'bg-gray-300'}`}>
+          className={`bg-black py-3 mx-3 mb-8 ${!selected && 'bg-gray-300'}`}>
           <Text className='text-center text-white text-xl'>Choose {selected?.title }</Text>
         </TouchableOpacity>
       </View>
