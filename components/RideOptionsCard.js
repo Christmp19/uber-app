@@ -2,6 +2,8 @@ import { FlatList, Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View
 import React, { useState } from 'react'
 import { Icon } from '@rneui/base'
 import { useNavigation } from '@react-navigation/native'
+import { useSelector } from 'react-redux'
+import { selectTravelTimeInformation } from '../slices/navSlice'
 
 const data = [
   {
@@ -24,9 +26,12 @@ const data = [
   }
 ]
 
+const SURGE_CHARGE_RATE = 1.5;
+
 const RideOptionsCard = () => {
   const navigation = useNavigation();
   const [selected, setSelected] = useState(null);
+  const travelTimeInformation = useSelector(selectTravelTimeInformation);
 
   return (
     <SafeAreaView className='bg-white flex-grow'>
@@ -41,7 +46,9 @@ const RideOptionsCard = () => {
             size={32}
           />
         </TouchableOpacity>
-        <Text className='text-center py-5 text-xl'>Select a Ride</Text>
+        <Text className='text-center py-5 text-xl'>
+          Select a Ride - {travelTimeInformation?.distance.text} 
+        </Text>
       </View>
       
       <FlatList
@@ -62,7 +69,7 @@ const RideOptionsCard = () => {
             />
             <View className='-ml-6'>
               <Text className='text-xl font-semibold'>{title}</Text>
-              <Text>Travel Time ...</Text>
+              <Text>{travelTimeInformation?.duration.text} Travel Time</Text>
             </View>
             <Text className='text-xl'>99€</Text>
           </TouchableOpacity>
